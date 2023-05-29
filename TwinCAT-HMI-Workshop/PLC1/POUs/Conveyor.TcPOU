@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="Conveyor" Id="{280f8e73-894e-4dba-a603-99b2a0659e25}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Conveyor
+VAR_INPUT
+	ActMotor 		: BOOL := FALSE;
+	RunMotor 		: BOOL := FALSE;
+	vMotor 			: LREAL := 400;
+	fMotorSpeed		: LREAL;
+	Pos_Bottle0 	: LREAL := 0; //Position Variable of Bottle 0
+	Pos_Bottle1 	: LREAL := 400; //Position Variable of Bottle 1
+	Pos_Bottle2 	: LREAL := 800; //Position Variable of Bottle 2
+	j 				: INT := 0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF MAIN.Activate THEN
+	ActMotor := TRUE;
+	IF Pump.ClockFill THEN
+		RunMotor := TRUE;
+		fMotorSpeed := vMotor;
+		j := j + 1;
+		IF j >= 100 THEN j := 100; END_IF
+		Pos_Bottle0 := 0 + vMotor * j/100; //Increasing by time
+		Pos_Bottle1 := 400 + vMotor * j/100; 
+		Pos_Bottle2 := 800 + vMotor * j/100; 
+		IF j = 100 THEN //Equal 1 second of transmission
+			Seal.bSealed := FALSE;
+			Pos_Bottle0 := 0; // Reset the value
+			Pos_Bottle1 := 400;
+			Pos_Bottle2 := 800;
+			j := 0;
+		END_IF
+	ELSE
+		RunMotor := FALSE;
+		fMotorSpeed := 0;
+	END_IF
+END_IF
+
+IF NOT MAIN.Activate THEN
+	ActMotor := FALSE;
+	RunMotor := FALSE; j := 0;
+	Pos_Bottle0 := 0;
+	Pos_Bottle1 := 400;
+	Pos_Bottle2 := 800;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="Conveyor">
+      <LineId Id="5" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="29" Count="3" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="19" Count="1" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="38" Count="1" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

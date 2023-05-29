@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="MAIN" Id="{2001528b-5c5c-4695-8654-6480e34a4370}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	Activate : BOOL;
+	bLed : BOOL := FALSE;
+	Timer1 : BOOL := FALSE;
+	Timer2 : BOOL := FALSE;
+	fbT2 : TON;
+	fbT3 : TON;
+	Init: BOOL := TRUE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Pump();
+Seal();
+Conveyor();
+IF Init AND GVL_Fill.bStart THEN
+	fbT2(IN := FALSE);
+	fbT3(IN := FALSE);
+	Init := FALSE;
+END_IF
+IF NOT GVL_Fill.bEmergency THEN
+	IF NOT GVL_Fill.bStop THEN
+		IF GVL_Fill.bStart THEN
+			Activate := TRUE;
+		END_IF
+		IF Activate THEN
+			GVL_Fill.mStart := TRUE;
+			bLed := TRUE;
+		ELSE
+			GVL_Fill.mStart := FALSE;
+			bLed := FALSE;
+		END_IF
+	ELSE
+		fbT3(IN := TRUE, PT := T#1S, Q => Timer2);
+		IF Timer2 THEN
+			fbT3(IN := FALSE);
+			GVL_Fill.bStop := FALSE;
+			Timer2 := FALSE;
+		END_IF
+		//GVL_Fill.bStop := FALSE;
+		Activate := FALSE;
+		bLed := FALSE;
+		Init := TRUE;
+	END_IF
+ELSE
+	GVL_Fill.bStop := FALSE;
+	GVL_Fill.bStart := FALSE;
+	GVL_Fill.mStart := FALSE;
+	Activate := FALSE;
+	bLed := FALSE;
+	Init := TRUE;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="158" Count="1" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="211" Count="1" />
+      <LineId Id="214" Count="1" />
+      <LineId Id="213" Count="0" />
+      <LineId Id="124" Count="11" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="175" Count="0" />
+      <LineId Id="193" Count="2" />
+      <LineId Id="208" Count="0" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="210" Count="0" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="216" Count="0" />
+      <LineId Id="147" Count="4" />
+      <LineId Id="153" Count="1" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

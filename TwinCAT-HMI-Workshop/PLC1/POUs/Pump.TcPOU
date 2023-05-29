@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="Pump" Id="{04fe6544-f8fa-475f-9fc7-5b9abe67aa42}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Pump
+VAR_INPUT
+	height : 	LREAL;
+	diameter : 	LREAL := 2;
+	volume :	LREAL := 25.13;
+	fbT1 :		TON;
+	FlowValve1 : LREAL := 0;
+	FlowValve2 : LREAL := 0;
+	FlowSensor1 : LREAL := 0;
+	FlowSensor2 : LREAL := 0;
+	bValve1Opened			: BOOL;
+	bValve2Opened			: BOOL;
+	Bottle :	LREAL := 0;
+	countFill :	INT := 0;
+	// tMove: TIME;
+	ClockFill: BOOL := FALSE;
+END_VAR
+VAR
+	ActValve : BOOL := TRUE;
+	ActFill : BOOL := TRUE;
+	Check_Fill: BOOL := FALSE;
+	//ReadyMove1 : BOOL := FALSE;
+	//ActMove1: BOOL := FALSE;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Cylinder Tank: Diameter = 500, Height = 1000
+FlowSensor1 := FlowValve1; FlowSensor2 := FlowValve2;
+volume := volume + (FlowValve1 - FlowValve2)/100;
+height := (4 * volume)/(pi * EXPT(diameter, 2));
+IF MAIN.Activate THEN
+	IF height >= 9 THEN //Upper level sensor
+		FlowValve1 := 0;
+		bValve1Opened := FALSE;
+	END_IF
+	IF height <= 8 THEN //Lower level sensor
+		FlowValve1 := 0.251;
+		bValve1Opened := TRUE;
+	END_IF
+	IF NOT ClockFill THEN 
+		FlowValve2 := 0.25; 
+		bValve2Opened := TRUE;
+	ELSE 
+		FlowValve2 := 0; 
+		bValve2Opened := FALSE;
+		JMP label1; //Jump to label1
+	END_IF 
+	IF countFill >= 1 THEN 
+		Seal.enableSeal := TRUE; 
+	END_IF
+	IF FlowValve2 = 0.25 AND ActFill AND Conveyor.Pos_Bottle1 = 400 THEN
+		Bottle := Bottle + FlowValve2/100;
+		IF Bottle >= 0.5 AND NOT Check_Fill THEN
+			ActFill := FALSE; // Stop Filling
+			Check_Fill := TRUE; //Ensure ActFill interrupted once
+		END_IF
+		IF Bottle >= 0.5 AND Check_Fill THEN
+			Bottle := 0;
+			countFill := countFill + 1; // Counting Filled Bottle
+			// Wait for Transmission
+			label1 : fbT1(IN := Check_Fill, PT := T#1S, Q => ActFill);
+			ClockFill := TRUE;
+			IF ActFill THEN
+				fbT1(IN := FALSE);
+				Check_Fill := FALSE;
+				ClockFill := FALSE;
+			END_IF
+		END_IF
+	END_IF
+END_IF
+
+IF NOT MAIN.Activate THEN
+	Bottle := 0; height := 8.95;
+	FlowValve1 := 0; FlowValve2 := 0;
+	countFill := 0; ActFill := TRUE; Check_Fill := FALSE;
+	ClockFill := FALSE;
+	IF GVL_Fill.bEmergency THEN
+		ActValve := FALSE;
+	END_IF
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="Pump">
+      <LineId Id="250" Count="0" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="248" Count="0" />
+      <LineId Id="247" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="229" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="301" Count="0" />
+      <LineId Id="235" Count="0" />
+      <LineId Id="231" Count="1" />
+      <LineId Id="302" Count="0" />
+      <LineId Id="233" Count="0" />
+      <LineId Id="186" Count="0" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="303" Count="0" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="272" Count="0" />
+      <LineId Id="304" Count="0" />
+      <LineId Id="273" Count="1" />
+      <LineId Id="197" Count="0" />
+      <LineId Id="275" Count="1" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="156" Count="1" />
+      <LineId Id="159" Count="0" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="106" Count="1" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="195" Count="0" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="184" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="187" Count="0" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="243" Count="0" />
+      <LineId Id="189" Count="1" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
