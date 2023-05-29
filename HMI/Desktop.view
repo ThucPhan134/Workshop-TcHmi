@@ -1,0 +1,78 @@
+﻿<div id="Desktop" data-tchmi-type="TcHmi.Controls.System.TcHmiView" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width-mode="Content" data-tchmi-min-width="100" data-tchmi-min-width-unit="%" data-tchmi-height-mode="Content" data-tchmi-min-height="100" data-tchmi-min-height-unit="%" data-tchmi-creator-viewport-width="1920" data-tchmi-creator-viewport-height="1080">
+  <div id="ViewDesktopBeckhoffLogo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-src="Images/Beckhoff_Logo.svg" data-tchmi-left="20" data-tchmi-top="20" data-tchmi-width="194" data-tchmi-height="57">
+
+  </div>
+<div id="Desktop_TcHmiImage_FillingSystem" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="556" data-tchmi-height-unit="px" data-tchmi-left="57" data-tchmi-left-unit="px" data-tchmi-top="130" data-tchmi-top-unit="px" data-tchmi-width="650" data-tchmi-width-unit="px" data-tchmi-src="Images/Overview.png" data-tchmi-creator-locked="True" data-tchmi-zindex="0" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
+</div>
+<div id="Desktop_TcHmiImage_CaplessBottle1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="146" data-tchmi-height-unit="px" data-tchmi-left="250" data-tchmi-left-unit="px" data-tchmi-top="695" data-tchmi-top-unit="px" data-tchmi-width="46" data-tchmi-width-unit="px" data-tchmi-src="Images/Capless bottle.png" data-tchmi-zindex="4" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
+</div>
+<div id="Desktop_TcHmiImage_CaplessBottle2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="146" data-tchmi-height-unit="px" data-tchmi-left="650" data-tchmi-left-unit="px" data-tchmi-top="695" data-tchmi-top-unit="px" data-tchmi-width="46" data-tchmi-width-unit="px" data-tchmi-src="Images/Capless bottle.png" data-tchmi-zindex="4" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
+</div>
+<div id="Desktop_TcHmiImage_Conveyor" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-left="210" data-tchmi-left-unit="px" data-tchmi-src="Images/conveyor.png" data-tchmi-top="839" data-tchmi-top-unit="px" data-tchmi-width="1500" data-tchmi-width-unit="px" data-tchmi-creator-locked="True" data-tchmi-zindex="3" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
+</div>
+<div id="Desktop_TcHmiImage_Motor" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="154" data-tchmi-height-unit="px" data-tchmi-left="194" data-tchmi-left-unit="px" data-tchmi-top="845" data-tchmi-top-unit="px" data-tchmi-width="206" data-tchmi-width-unit="px" data-tchmi-src="Images/Motor.png" data-tchmi-creator-locked="True" data-tchmi-zindex="3" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
+</div>
+<div id="Desktop_TcHmiRectangle_CappingMachineBody1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="55" data-tchmi-height-unit="px" data-tchmi-left="1045" data-tchmi-left-unit="px" data-tchmi-top="562" data-tchmi-top-unit="px" data-tchmi-width="64" data-tchmi-width-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-stroke-thickness="0" data-tchmi-zindex="7">
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "angle": 90.0,
+  "stopPoints": [
+    {
+      "color": "rgba(162, 162, 162, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(255, 255, 255, 1)",
+      "stop": "50%"
+    },
+    {
+      "color": "rgba(162, 162, 162, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+</div>
+<div id="Desktop_TcHmiRectangle_CappingMachineBody2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="55" data-tchmi-height-unit="px" data-tchmi-left="1062" data-tchmi-left-unit="px" data-tchmi-top="593" data-tchmi-top-unit="px" data-tchmi-width="28" data-tchmi-width-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-stroke-thickness="0" data-tchmi-zindex="6">
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "angle": 90.0,
+  "stopPoints": [
+    {
+      "color": "rgba(162, 162, 162, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(255, 255, 255, 1)",
+      "stop": "50%"
+    },
+    {
+      "color": "rgba(162, 162, 162, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+</div>
+<div id="Desktop_TcHmiRectangle_CappingMachineBody3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="24" data-tchmi-height-unit="px" data-tchmi-left="1053" data-tchmi-left-unit="px" data-tchmi-top="648" data-tchmi-top-unit="px" data-tchmi-width="48" data-tchmi-width-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-stroke-thickness="0" data-tchmi-zindex="8">
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "angle": 90.0,
+  "stopPoints": [
+    {
+      "color": "rgba(162, 162, 162, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(255, 255, 255, 1)",
+      "stop": "50%"
+    },
+    {
+      "color": "rgba(162, 162, 162, 1)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
+</div>
+</div>
